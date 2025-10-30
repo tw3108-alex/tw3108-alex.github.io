@@ -1,0 +1,18 @@
+---
+title: "NYC Restaurant Inspections"
+author: "Tao Wu"
+output: flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r cars}
+summary(cars)
+```
+
+
