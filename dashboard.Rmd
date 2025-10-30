@@ -4,13 +4,14 @@ author: "Tao Wu"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
-    vertical_layout: fill
+    vertical_layout: scroll
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+Column {data-width=650}
+-----------------------------------------------------------------------
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(p8105.datasets)
@@ -42,6 +43,10 @@ plot <- plot_ly(data  = data_pic,x = ~longitude, y = ~latitude, type  = "scatter
     yaxis = list(title = "Longitude",range = c(40.5, 40.95))
   )
 plot 
+```
+Column {data-width=350}
+-----------------------------------------------------------------------
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
 data_pic %>%
   filter(!is.na(score)) %>%
   mutate(boro = fct_reorder(boro, score)) %>%

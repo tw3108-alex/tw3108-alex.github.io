@@ -11,6 +11,8 @@ navbar:
       href: https://github.com/tw3108-alex/
     - text: "Resume"
       href: resume.pdf
+    - text: "Dashboard"
+      href: dashboard.html
 output:
   html_document:
     theme: cerulean
