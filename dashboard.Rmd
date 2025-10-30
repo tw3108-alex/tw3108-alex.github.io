@@ -1,7 +1,8 @@
 ---
 title: "NYC Restaurant Inspections"
 author: "Tao Wu"
-output: flexdashboard::flex_dashboard:
+output: 
+  flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
 ---
@@ -10,7 +11,7 @@ output: flexdashboard::flex_dashboard:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, message=FALSE, warning=FALSE}
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(p8105.datasets)
 library(plotly)
@@ -49,6 +50,17 @@ data_pic %>%
     title = "Distribution of Inspection Scores by Borough",
     yaxis = list(title = "Score"),
     showlegend = TRUE
+  )
+data %>%
+  filter(!is.na(score)) %>%
+  count(boro) %>%
+  mutate(boro = fct_reorder(boro, n)) %>%
+  plot_ly(x = ~boro, y = ~n,type = "bar",color = ~boro) %>%
+  layout(
+    title = "Number of Restaurant Inspections by Borough",
+    xaxis = list(title = "Borough"),
+    yaxis = list(title = "Number of Inspections"),
+    showlegend = FALSE
   )
 ```
 
