@@ -10,7 +10,7 @@ output: flexdashboard::flex_dashboard:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, include=FALSE, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(p8105.datasets)
 library(plotly)
@@ -27,6 +27,19 @@ data <- rest_inspec %>%
           !is.na(latitude),
           !is.na(longitude),
 )
+data_pic <- data %>%
+group_by(boro) %>%
+slice_sample(n = 5000)%>%
+mutate(
+info = paste0("Name: ", dba, "Borough: ", boro, "Cuisine: ", cuisine, "Score: ", score)
+)
+plot <- plot_ly(data  = data_pic,x = ~longitude, y = ~latitude, type  = "scatter", mode  = "markers",
+              color = ~score,text  = ~info, alpha = 0.1) %>%
+  layout(
+    title = "Restaurant Locations colored by Inspection Score",
+    xaxis = list(title = "Latitude", range = c(-74.3, -73.7)),
+    yaxis = list(title = "Longitude",range = c(40.5, 40.95))
+  )
+plot 
 ```
-
 
