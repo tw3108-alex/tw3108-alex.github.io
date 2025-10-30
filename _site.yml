@@ -9,6 +9,8 @@ navbar:
       href: mailto:tw3108@columbia.edu
     - icon: fa-github fa-lg
       href: https://github.com/tw3108-alex/
+    - text: "Resume"
+      href: resume.pdf
 output:
   html_document:
     theme: cerulean

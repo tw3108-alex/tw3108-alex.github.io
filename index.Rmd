@@ -1,15 +1,22 @@
 ---
-title: "p8105_tw3108_hw4"
+title: "YEEHA! Welcome to my website!"
 author: "Tao Wu"
-date: "2025-10-29"
-output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
- GitHub: <https://github.com/tw3108-alex>
 
-- Email: tw3108@columbia.edu
+my GitHub: <https://github.com/tw3108-alex>
+
+Personal Page: [About](about.html)
+
+Email: tw3108@columbia.edu
+
+Tel: 201-275-8987
+
+linkedin: <https://www.linkedin.com/in/tao-wu-1aa006385/>
+
+
 

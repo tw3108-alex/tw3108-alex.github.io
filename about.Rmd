@@ -1,12 +1,27 @@
 ---
 title: "about"
-output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Hi! I am Tao Wu, currently studying Biostatistics at Columbia University. My recent work focuses on time-series modeling and data analysis.
 
-reusme
-[about](about.html)
+**2025 – Now**  
+: Columbia University — M.S. in **Biostatistics**
+
+**2021 – 2025**  
+: University of Illinois Urbana–Champaign — B.S. in **Statistics & Actuarial Science**
+
+### Projects
+**UIUC iRisk Lab** — data cleaning; database building; key design & record linkage (merging keys).
+
+### Hobbies
+- Go chess — secondary-athlete level  
+- Basketball  
+- Video games
+
+More info **[Resume](resume.pdf)** 
+
+**[Home](index.html)**
