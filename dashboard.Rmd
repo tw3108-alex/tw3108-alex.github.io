@@ -10,9 +10,23 @@ output: flexdashboard::flex_dashboard:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, include=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
 
-```{r cars}
-summary(cars)
+data("rest_inspec")
+data <- rest_inspec %>%
+  mutate(cuisine = cuisine_description,
+         grade = na_if(grade, ""),
+         score = as.numeric(score), 
+         inspection_date = as.Date(inspection_date)) %>%
+  select(camis, dba, boro, cuisine, grade, score, inspection_date, latitude, longitude) %>%
+  filter( !is.na(score),
+          !is.na(latitude),
+          !is.na(longitude),
+)
 ```
 
 
