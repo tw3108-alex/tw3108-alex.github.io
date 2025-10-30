@@ -1,0 +1,15 @@
+---
+title: "p8105_tw3108_hw4"
+author: "Tao Wu"
+date: "2025-10-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+ GitHub: <https://github.com/tw3108-alex>
+
+- Email: tw3108@columbia.edu
+
