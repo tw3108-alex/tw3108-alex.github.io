@@ -41,5 +41,14 @@ plot <- plot_ly(data  = data_pic,x = ~longitude, y = ~latitude, type  = "scatter
     yaxis = list(title = "Longitude",range = c(40.5, 40.95))
   )
 plot 
+data_pic %>%
+  filter(!is.na(score)) %>%
+  mutate(boro = fct_reorder(boro, score)) %>%
+  plot_ly(y = ~score,color = ~boro,type = "box") %>%
+  layout(
+    title = "Distribution of Inspection Scores by Borough",
+    yaxis = list(title = "Score"),
+    showlegend = TRUE
+  )
 ```
 
