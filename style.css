@@ -221,11 +221,148 @@ p {
   pointer-events: none;
 }
 
-#threebody-canvas {
+.threebody-system {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
+}
+
+.trail {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 64%;
+  height: 36%;
+  border: 1px solid rgba(139, 211, 255, 0.13);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  filter: blur(0.2px);
+}
+
+.trail-2 {
+  width: 54%;
+  height: 46%;
+  transform: translate(-50%, -50%) rotate(38deg);
+  border-color: rgba(184, 190, 255, 0.12);
+}
+
+.trail-3 {
+  width: 44%;
+  height: 58%;
+  transform: translate(-50%, -50%) rotate(82deg);
+  border-color: rgba(220, 235, 255, 0.10);
+}
+
+.body {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 18px rgba(139, 211, 255, 0.75),
+    0 0 42px rgba(139, 211, 255, 0.22);
+}
+
+.body::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 211, 255, 0.24), transparent 66%);
+}
+
+.body-1 {
+  background: radial-gradient(circle at 30% 25%, #ffffff, #dcecff 34%, #23395f 100%);
+  animation: threebody-one 13s ease-in-out infinite;
+}
+
+.body-2 {
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle at 30% 25%, #ffffff, #8bd3ff 36%, #18324d 100%);
+  animation: threebody-two 11s ease-in-out infinite;
+}
+
+.body-3 {
+  width: 21px;
+  height: 21px;
+  background: radial-gradient(circle at 30% 25%, #ffffff, #b8beff 35%, #252347 100%);
+  animation: threebody-three 15s ease-in-out infinite;
+}
+
+@keyframes threebody-one {
+  0% {
+    transform: translate(-50%, -50%) translate(-112px, -54px);
+  }
+  14% {
+    transform: translate(-50%, -50%) translate(36px, -118px);
+  }
+  29% {
+    transform: translate(-50%, -50%) translate(126px, -20px);
+  }
+  45% {
+    transform: translate(-50%, -50%) translate(48px, 82px);
+  }
+  62% {
+    transform: translate(-50%, -50%) translate(-96px, 58px);
+  }
+  78% {
+    transform: translate(-50%, -50%) translate(-38px, -18px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(-112px, -54px);
+  }
+}
+
+@keyframes threebody-two {
+  0% {
+    transform: translate(-50%, -50%) translate(102px, 44px);
+  }
+  16% {
+    transform: translate(-50%, -50%) translate(-24px, 104px);
+  }
+  31% {
+    transform: translate(-50%, -50%) translate(-128px, 10px);
+  }
+  48% {
+    transform: translate(-50%, -50%) translate(-38px, -92px);
+  }
+  66% {
+    transform: translate(-50%, -50%) translate(86px, -70px);
+  }
+  83% {
+    transform: translate(-50%, -50%) translate(28px, 12px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(102px, 44px);
+  }
+}
+
+@keyframes threebody-three {
+  0% {
+    transform: translate(-50%, -50%) translate(10px, -106px);
+  }
+  13% {
+    transform: translate(-50%, -50%) translate(118px, -42px);
+  }
+  27% {
+    transform: translate(-50%, -50%) translate(82px, 78px);
+  }
+  43% {
+    transform: translate(-50%, -50%) translate(-54px, 96px);
+  }
+  60% {
+    transform: translate(-50%, -50%) translate(-118px, -28px);
+  }
+  82% {
+    transform: translate(-50%, -50%) translate(-16px, -58px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(10px, -106px);
+  }
 }
 
 .orbit-label {
