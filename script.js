@@ -126,122 +126,145 @@ document.querySelectorAll(".glass-card").forEach((card) => {
 document.getElementById("year").textContent = new Date().getFullYear();
 
 const threeCanvas = document.getElementById("threebody-canvas");
-const threeCtx = threeCanvas?.getContext("2d");
 
-function resizeThreeBody() {
-  if (!threeCanvas || !threeCtx) return;
+if (threeCanvas) {
+  const threeCtx = threeCanvas.getContext("2d");
 
-  const rect = threeCanvas.getBoundingClientRect();
-  const ratio = window.devicePixelRatio || 1;
+  function resizeThreeBody() {
+    const parent = threeCanvas.parentElement;
+    const size = parent.getBoundingClientRect();
 
-  threeCanvas.width = rect.width * ratio;
-  threeCanvas.height = rect.height * ratio;
-  threeCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
-}
+    const w = size.width || 420;
+    const h = size.height || 420;
+    const ratio = window.devicePixelRatio || 1;
 
-function bodyPosition(t, phase, radius, wobble) {
-  return {
-    x:
-      Math.sin(t + phase) * radius * 0.72 +
-      Math.sin(2 * t - phase * 0.7) * radius * 0.22 +
-      Math.cos(3 * t + phase) * radius * wobble,
-    y:
-      Math.cos(1.15 * t + phase) * radius * 0.48 +
-      Math.sin(2 * t + phase * 1.3) * radius * 0.27 +
-      Math.cos(4 * t - phase) * radius * wobble * 0.82,
-  };
-}
+    threeCanvas.width = w * ratio;
+    threeCanvas.height = h * ratio;
+    threeCanvas.style.width = `${w}px`;
+    threeCanvas.style.height = `${h}px`;
 
-function drawThreeBody(now) {
-  if (!threeCanvas || !threeCtx) return;
-
-  const rect = threeCanvas.getBoundingClientRect();
-  const w = rect.width;
-  const h = rect.height;
-  const cx = w / 2;
-  const cy = h / 2 - 10;
-  const radius = Math.min(w, h) * 0.31;
-
-  threeCtx.clearRect(0, 0, w, h);
-
-  const t = now * 0.00033;
-  const phases = [0, (Math.PI * 2) / 3, (Math.PI * 4) / 3];
-
-  const colors = [
-    "rgba(205, 226, 255,",
-    "rgba(139, 211, 255,",
-    "rgba(184, 190, 255,",
-  ];
-
-  for (let i = 0; i < 3; i++) {
-    threeCtx.beginPath();
-
-    for (let step = 150; step >= 0; step--) {
-      const tt = t - step * 0.018;
-      const p = bodyPosition(tt, phases[i], radius, 0.16);
-      const x = cx + p.x;
-      const y = cy + p.y;
-
-      if (step === 150) {
-        threeCtx.moveTo(x, y);
-      } else {
-        threeCtx.lineTo(x, y);
-      }
-    }
-
-    threeCtx.strokeStyle = colors[i] + "0.18)";
-    threeCtx.lineWidth = 1.15;
-    threeCtx.stroke();
+    threeCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
   }
 
-  const points = phases.map((phase) => {
-    const p = bodyPosition(t, phase, radius, 0.16);
-    return { x: cx + p.x, y: cy + p.y };
-  });
+  function bodyPosition(t, phase, radius) {
+    return {
+      x:
+        Math.sin(t + phase) * radius * 0.75 +
+        Math.sin(2.1 * t - phase) * radius * 0.22 +
+        Math.cos(3.4 * t + phase * 0.5) * radius * 0.12,
+      y:
+        Math.cos(1.18 * t + phase) * radius * 0.52 +
+        Math.sin(2.3 * t + phase * 1.2) * radius * 0.28 +
+        Math.cos(3.7 * t - phase) * radius * 0.12,
+    };
+  }
 
-  threeCtx.beginPath();
-  threeCtx.moveTo(points[0].x, points[0].y);
-  threeCtx.lineTo(points[1].x, points[1].y);
-  threeCtx.lineTo(points[2].x, points[2].y);
-  threeCtx.closePath();
-  threeCtx.strokeStyle = "rgba(148, 163, 184, 0.11)";
-  threeCtx.lineWidth = 1;
-  threeCtx.stroke();
+  function drawThreeBody(now) {
+    const rect = threeCanvas.getBoundingClientRect();
+    const w = rect.width || 420;
+    const h = rect.height || 420;
 
-  points.forEach((point, i) => {
-    const glow = threeCtx.createRadialGradient(point.x, point.y, 0, point.x, point.y, 34);
+    const cx = w / 2;
+    const cy = h / 2 - 14;
+    const radius = Math.min(w, h) * 0.31;
 
-    glow.addColorStop(0, colors[i] + "0.78)");
-    glow.addColorStop(0.35, colors[i] + "0.18)");
-    glow.addColorStop(1, colors[i] + "0)");
+    threeCtx.clearRect(0, 0, w, h);
 
+    const t = now * 0.00034;
+    const phases = [0, Math.PI * 2 / 3, Math.PI * 4 / 3];
+
+    const colors = [
+      "rgba(220, 235, 255,",
+      "rgba(139, 211, 255,",
+      "rgba(184, 190, 255,",
+    ];
+
+    // Draw fading trajectories
+    for (let i = 0; i < 3; i++) {
+      threeCtx.beginPath();
+
+      for (let step = 180; step >= 0; step--) {
+        const tt = t - step * 0.017;
+        const p = bodyPosition(tt, phases[i], radius);
+        const x = cx + p.x;
+        const y = cy + p.y;
+
+        if (step === 180) {
+          threeCtx.moveTo(x, y);
+        } else {
+          threeCtx.lineTo(x, y);
+        }
+      }
+
+      threeCtx.strokeStyle = colors[i] + "0.22)";
+      threeCtx.lineWidth = 1.2;
+      threeCtx.stroke();
+    }
+
+    const points = phases.map((phase) => {
+      const p = bodyPosition(t, phase, radius);
+      return {
+        x: cx + p.x,
+        y: cy + p.y,
+      };
+    });
+
+    // Draw subtle gravitational triangle
     threeCtx.beginPath();
-    threeCtx.arc(point.x, point.y, 34, 0, Math.PI * 2);
-    threeCtx.fillStyle = glow;
-    threeCtx.fill();
+    threeCtx.moveTo(points[0].x, points[0].y);
+    threeCtx.lineTo(points[1].x, points[1].y);
+    threeCtx.lineTo(points[2].x, points[2].y);
+    threeCtx.closePath();
+    threeCtx.strokeStyle = "rgba(148, 163, 184, 0.14)";
+    threeCtx.lineWidth = 1;
+    threeCtx.stroke();
 
-    const body = threeCtx.createRadialGradient(
-      point.x - 4,
-      point.y - 5,
-      1,
-      point.x,
-      point.y,
-      12
-    );
+    // Draw the three bodies
+    points.forEach((point, i) => {
+      const glow = threeCtx.createRadialGradient(
+        point.x,
+        point.y,
+        0,
+        point.x,
+        point.y,
+        42
+      );
 
-    body.addColorStop(0, "rgba(255, 255, 255, 0.96)");
-    body.addColorStop(0.38, colors[i] + "0.9)");
-    body.addColorStop(1, "rgba(15, 23, 42, 0.95)");
+      glow.addColorStop(0, colors[i] + "0.72)");
+      glow.addColorStop(0.38, colors[i] + "0.18)");
+      glow.addColorStop(1, colors[i] + "0)");
 
-    threeCtx.beginPath();
-    threeCtx.arc(point.x, point.y, 8 + i * 1.1, 0, Math.PI * 2);
-    threeCtx.fillStyle = body;
-    threeCtx.fill();
-  });
+      threeCtx.beginPath();
+      threeCtx.arc(point.x, point.y, 42, 0, Math.PI * 2);
+      threeCtx.fillStyle = glow;
+      threeCtx.fill();
 
-  requestAnimationFrame(drawThreeBody);
+      const body = threeCtx.createRadialGradient(
+        point.x - 4,
+        point.y - 5,
+        1,
+        point.x,
+        point.y,
+        13
+      );
+
+      body.addColorStop(0, "rgba(255, 255, 255, 0.98)");
+      body.addColorStop(0.35, colors[i] + "0.95)");
+      body.addColorStop(1, "rgba(10, 18, 35, 0.96)");
+
+      threeCtx.beginPath();
+      threeCtx.arc(point.x, point.y, 8 + i * 1.2, 0, Math.PI * 2);
+      threeCtx.fillStyle = body;
+      threeCtx.fill();
+    });
+
+    requestAnimationFrame(drawThreeBody);
+  }
+
+  window.addEventListener("resize", resizeThreeBody);
+
+  setTimeout(() => {
+    resizeThreeBody();
+    requestAnimationFrame(drawThreeBody);
+  }, 100);
 }
-
-window.addEventListener("resize", resizeThreeBody);
-resizeThreeBody();
-requestAnimationFrame(drawThreeBody);
