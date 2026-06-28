@@ -1,10 +1,10 @@
+
 * {
   box-sizing: border-box;
 }
 
 :root {
   --bg: #01030a;
-  --bg-2: #030712;
   --text: #eef2ff;
   --muted: #8d9ab8;
   --line: rgba(148, 163, 184, 0.18);
@@ -192,6 +192,8 @@ p {
   box-shadow: 0 0 22px rgba(139, 211, 255, 0.12);
 }
 
+/* Stable right-side galaxy animation */
+
 .threebody-card {
   position: relative;
   width: min(520px, 86vw);
@@ -200,9 +202,9 @@ p {
   border-radius: 34px;
   border: 1px solid rgba(148, 163, 184, 0.14);
   background:
-    radial-gradient(circle at 50% 45%, rgba(160, 190, 255, 0.12), transparent 22%),
-    radial-gradient(circle at 48% 40%, rgba(70, 110, 180, 0.16), transparent 42%),
-    linear-gradient(180deg, rgba(5, 9, 22, 0.62), rgba(0, 0, 0, 0.86));
+    radial-gradient(circle at 50% 44%, rgba(170, 205, 255, 0.14), transparent 18%),
+    radial-gradient(circle at 48% 40%, rgba(70, 110, 180, 0.18), transparent 42%),
+    linear-gradient(180deg, rgba(5, 9, 22, 0.68), rgba(0, 0, 0, 0.88));
   box-shadow:
     inset 0 0 110px rgba(139, 211, 255, 0.05),
     0 32px 120px rgba(0, 0, 0, 0.58);
@@ -214,13 +216,14 @@ p {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.18), transparent 1px),
-    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.12), transparent 1px),
-    radial-gradient(circle at 42% 75%, rgba(255, 255, 255, 0.10), transparent 1px),
-    radial-gradient(circle at 82% 68%, rgba(255, 255, 255, 0.08), transparent 1px);
+    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.2), transparent 1px),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.14), transparent 1px),
+    radial-gradient(circle at 42% 75%, rgba(255, 255, 255, 0.12), transparent 1px),
+    radial-gradient(circle at 82% 68%, rgba(255, 255, 255, 0.1), transparent 1px);
   background-size: 110px 110px, 150px 150px, 190px 190px, 230px 230px;
-  opacity: 0.42;
+  opacity: 0.45;
   pointer-events: none;
+  z-index: 0;
 }
 
 .galaxy-system {
@@ -234,76 +237,86 @@ p {
   position: absolute;
   left: 50%;
   top: 43%;
-  width: 86px;
-  height: 86px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background:
-    radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.95), rgba(139, 211, 255, 0.46) 28%, rgba(30, 55, 110, 0.14) 58%, transparent 72%);
-  filter: blur(0.2px);
+    radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.98), rgba(139, 211, 255, 0.5) 28%, rgba(30, 55, 110, 0.18) 58%, transparent 74%);
   box-shadow:
-    0 0 48px rgba(139, 211, 255, 0.28),
-    0 0 120px rgba(80, 120, 200, 0.12);
+    0 0 54px rgba(139, 211, 255, 0.32),
+    0 0 140px rgba(80, 120, 200, 0.16);
 }
 
-.galaxy-disk {
+.galaxy-dust {
   position: absolute;
   left: 50%;
   top: 43%;
   border-radius: 50%;
-  transform: translate(-50%, -50%) rotate(-18deg);
   pointer-events: none;
 }
 
-.disk-1 {
+.dust-1 {
   width: 78%;
   height: 28%;
-  border: 1px solid rgba(139, 211, 255, 0.12);
-  box-shadow: 0 0 32px rgba(139, 211, 255, 0.06);
-  animation: galaxy-drift 42s linear infinite;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  border: 1px solid rgba(139, 211, 255, 0.13);
+  box-shadow:
+    0 0 36px rgba(139, 211, 255, 0.07),
+    inset 0 0 34px rgba(139, 211, 255, 0.035);
+  animation: slow-drift-one 48s linear infinite;
 }
 
-.disk-2 {
+.dust-2 {
   width: 66%;
   height: 38%;
-  border: 1px solid rgba(184, 190, 255, 0.11);
   transform: translate(-50%, -50%) rotate(24deg);
-  animation: galaxy-drift-reverse 56s linear infinite;
+  border: 1px solid rgba(184, 190, 255, 0.12);
+  box-shadow:
+    0 0 32px rgba(184, 190, 255, 0.06),
+    inset 0 0 28px rgba(184, 190, 255, 0.025);
+  animation: slow-drift-two 62s linear infinite;
 }
 
-.disk-3 {
+.dust-3 {
   width: 50%;
   height: 50%;
-  border: 1px solid rgba(220, 235, 255, 0.08);
   transform: translate(-50%, -50%) rotate(68deg);
-  animation: galaxy-drift 64s linear infinite;
+  border: 1px solid rgba(220, 235, 255, 0.09);
+  box-shadow:
+    0 0 24px rgba(220, 235, 255, 0.04),
+    inset 0 0 24px rgba(220, 235, 255, 0.02);
+  animation: slow-drift-three 76s linear infinite;
 }
 
-.orbit-path {
+.galaxy-orbit {
   position: absolute;
   left: 50%;
   top: 43%;
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform-origin: center center;
   will-change: transform;
 }
 
-.orbit-path-1 {
+.orbit-1 {
   width: 76%;
   height: 30%;
-  animation: orbit-one 18s linear infinite;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  animation: orbit-one 20s linear infinite;
 }
 
-.orbit-path-2 {
+.orbit-2 {
   width: 62%;
   height: 44%;
-  animation: orbit-two 23s linear infinite reverse;
+  transform: translate(-50%, -50%) rotate(31deg);
+  animation: orbit-two 26s linear infinite reverse;
 }
 
-.orbit-path-3 {
+.orbit-3 {
   width: 48%;
   height: 58%;
-  animation: orbit-three 31s linear infinite;
+  transform: translate(-50%, -50%) rotate(72deg);
+  animation: orbit-three 34s linear infinite;
 }
 
 .celestial-body {
@@ -318,7 +331,7 @@ p {
 .celestial-body::before {
   content: "";
   position: absolute;
-  inset: -28px;
+  inset: -30px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(139, 211, 255, 0.22), transparent 68%);
   pointer-events: none;
@@ -334,8 +347,8 @@ p {
 }
 
 .body-2 {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   background: radial-gradient(circle at 32% 28%, #ffffff, #8bd3ff 32%, #275982 58%, #0b1628 100%);
   box-shadow:
     0 0 22px rgba(139, 211, 255, 0.66),
@@ -378,7 +391,7 @@ p {
   }
 }
 
-@keyframes galaxy-drift {
+@keyframes slow-drift-one {
   from {
     transform: translate(-50%, -50%) rotate(-18deg);
   }
@@ -387,7 +400,7 @@ p {
   }
 }
 
-@keyframes galaxy-drift-reverse {
+@keyframes slow-drift-two {
   from {
     transform: translate(-50%, -50%) rotate(24deg);
   }
@@ -396,181 +409,20 @@ p {
   }
 }
 
+@keyframes slow-drift-three {
+  from {
+    transform: translate(-50%, -50%) rotate(68deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(428deg);
+  }
+}
+
 .orbit-label {
   position: absolute;
   bottom: 7%;
   left: 50%;
   z-index: 5;
-  transform: translateX(-50%);
-  text-align: center;
-  padding: 0.82rem 1.15rem;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 999px;
-  background: rgba(2, 6, 23, 0.72);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 30px rgba(15, 23, 42, 0.5);
-}
-
-.orbit-label strong {
-  font-family: "Times New Roman", Times, Georgia, serif;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-}
-
-.orbit-label small {
-  display: block;
-  color: var(--muted);
-  margin-top: 0.2rem;
-}
-
-.threebody-system {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.trail {
-  position: absolute;
-  left: 50%;
-  top: 44%;
-  width: 64%;
-  height: 36%;
-  border: 1px solid rgba(139, 211, 255, 0.13);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) rotate(-18deg);
-  filter: blur(0.2px);
-}
-
-.trail-2 {
-  width: 54%;
-  height: 46%;
-  transform: translate(-50%, -50%) rotate(38deg);
-  border-color: rgba(184, 190, 255, 0.12);
-}
-
-.trail-3 {
-  width: 44%;
-  height: 58%;
-  transform: translate(-50%, -50%) rotate(82deg);
-  border-color: rgba(220, 235, 255, 0.10);
-}
-
-.body {
-  position: absolute;
-  left: 50%;
-  top: 43%;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow:
-    0 0 18px rgba(139, 211, 255, 0.75),
-    0 0 42px rgba(139, 211, 255, 0.22);
-}
-
-.body::before {
-  content: "";
-  position: absolute;
-  inset: -18px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 211, 255, 0.24), transparent 66%);
-}
-
-.body-1 {
-  background: radial-gradient(circle at 30% 25%, #ffffff, #dcecff 34%, #23395f 100%);
-  animation: threebody-one 13s ease-in-out infinite;
-}
-
-.body-2 {
-  width: 15px;
-  height: 15px;
-  background: radial-gradient(circle at 30% 25%, #ffffff, #8bd3ff 36%, #18324d 100%);
-  animation: threebody-two 11s ease-in-out infinite;
-}
-
-.body-3 {
-  width: 21px;
-  height: 21px;
-  background: radial-gradient(circle at 30% 25%, #ffffff, #b8beff 35%, #252347 100%);
-  animation: threebody-three 15s ease-in-out infinite;
-}
-
-@keyframes threebody-one {
-  0% {
-    transform: translate(-50%, -50%) translate(-112px, -54px);
-  }
-  14% {
-    transform: translate(-50%, -50%) translate(36px, -118px);
-  }
-  29% {
-    transform: translate(-50%, -50%) translate(126px, -20px);
-  }
-  45% {
-    transform: translate(-50%, -50%) translate(48px, 82px);
-  }
-  62% {
-    transform: translate(-50%, -50%) translate(-96px, 58px);
-  }
-  78% {
-    transform: translate(-50%, -50%) translate(-38px, -18px);
-  }
-  100% {
-    transform: translate(-50%, -50%) translate(-112px, -54px);
-  }
-}
-
-@keyframes threebody-two {
-  0% {
-    transform: translate(-50%, -50%) translate(102px, 44px);
-  }
-  16% {
-    transform: translate(-50%, -50%) translate(-24px, 104px);
-  }
-  31% {
-    transform: translate(-50%, -50%) translate(-128px, 10px);
-  }
-  48% {
-    transform: translate(-50%, -50%) translate(-38px, -92px);
-  }
-  66% {
-    transform: translate(-50%, -50%) translate(86px, -70px);
-  }
-  83% {
-    transform: translate(-50%, -50%) translate(28px, 12px);
-  }
-  100% {
-    transform: translate(-50%, -50%) translate(102px, 44px);
-  }
-}
-
-@keyframes threebody-three {
-  0% {
-    transform: translate(-50%, -50%) translate(10px, -106px);
-  }
-  13% {
-    transform: translate(-50%, -50%) translate(118px, -42px);
-  }
-  27% {
-    transform: translate(-50%, -50%) translate(82px, 78px);
-  }
-  43% {
-    transform: translate(-50%, -50%) translate(-54px, 96px);
-  }
-  60% {
-    transform: translate(-50%, -50%) translate(-118px, -28px);
-  }
-  82% {
-    transform: translate(-50%, -50%) translate(-16px, -58px);
-  }
-  100% {
-    transform: translate(-50%, -50%) translate(10px, -106px);
-  }
-}
-
-.orbit-label {
-  position: absolute;
-  bottom: 7%;
-  left: 50%;
   transform: translateX(-50%);
   text-align: center;
   padding: 0.82rem 1.15rem;
@@ -730,4 +582,9 @@ footer {
     padding-left: 5vw;
     padding-right: 5vw;
   }
+
+  .threebody-card {
+    width: min(390px, 90vw);
+  }
 }
+
