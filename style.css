@@ -194,17 +194,18 @@ p {
 
 .threebody-card {
   position: relative;
-  width: min(440px, 82vw);
+  width: min(520px, 86vw);
   aspect-ratio: 1;
   margin: 0 auto;
-  border-radius: 32px;
-  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 34px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
   background:
-    radial-gradient(circle at 50% 42%, rgba(80, 110, 170, 0.1), transparent 38%),
-    linear-gradient(180deg, rgba(8, 13, 26, 0.42), rgba(3, 7, 18, 0.78));
+    radial-gradient(circle at 50% 45%, rgba(160, 190, 255, 0.12), transparent 22%),
+    radial-gradient(circle at 48% 40%, rgba(70, 110, 180, 0.16), transparent 42%),
+    linear-gradient(180deg, rgba(5, 9, 22, 0.62), rgba(0, 0, 0, 0.86));
   box-shadow:
-    inset 0 0 80px rgba(148, 163, 184, 0.035),
-    0 26px 90px rgba(0, 0, 0, 0.45);
+    inset 0 0 110px rgba(139, 211, 255, 0.05),
+    0 32px 120px rgba(0, 0, 0, 0.58);
   overflow: hidden;
 }
 
@@ -213,12 +214,213 @@ p {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 26% 22%, rgba(255, 255, 255, 0.12), transparent 1px),
-    radial-gradient(circle at 72% 34%, rgba(255, 255, 255, 0.1), transparent 1px),
-    radial-gradient(circle at 58% 76%, rgba(255, 255, 255, 0.08), transparent 1px);
-  background-size: 90px 90px, 130px 130px, 170px 170px;
-  opacity: 0.32;
+    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.18), transparent 1px),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.12), transparent 1px),
+    radial-gradient(circle at 42% 75%, rgba(255, 255, 255, 0.10), transparent 1px),
+    radial-gradient(circle at 82% 68%, rgba(255, 255, 255, 0.08), transparent 1px);
+  background-size: 110px 110px, 150px 150px, 190px 190px, 230px 230px;
+  opacity: 0.42;
   pointer-events: none;
+}
+
+.galaxy-system {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.galaxy-core {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.95), rgba(139, 211, 255, 0.46) 28%, rgba(30, 55, 110, 0.14) 58%, transparent 72%);
+  filter: blur(0.2px);
+  box-shadow:
+    0 0 48px rgba(139, 211, 255, 0.28),
+    0 0 120px rgba(80, 120, 200, 0.12);
+}
+
+.galaxy-disk {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  pointer-events: none;
+}
+
+.disk-1 {
+  width: 78%;
+  height: 28%;
+  border: 1px solid rgba(139, 211, 255, 0.12);
+  box-shadow: 0 0 32px rgba(139, 211, 255, 0.06);
+  animation: galaxy-drift 42s linear infinite;
+}
+
+.disk-2 {
+  width: 66%;
+  height: 38%;
+  border: 1px solid rgba(184, 190, 255, 0.11);
+  transform: translate(-50%, -50%) rotate(24deg);
+  animation: galaxy-drift-reverse 56s linear infinite;
+}
+
+.disk-3 {
+  width: 50%;
+  height: 50%;
+  border: 1px solid rgba(220, 235, 255, 0.08);
+  transform: translate(-50%, -50%) rotate(68deg);
+  animation: galaxy-drift 64s linear infinite;
+}
+
+.orbit-path {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.orbit-path-1 {
+  width: 76%;
+  height: 30%;
+  animation: orbit-one 18s linear infinite;
+}
+
+.orbit-path-2 {
+  width: 62%;
+  height: 44%;
+  animation: orbit-two 23s linear infinite reverse;
+}
+
+.orbit-path-3 {
+  width: 48%;
+  height: 58%;
+  animation: orbit-three 31s linear infinite;
+}
+
+.celestial-body {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.celestial-body::before {
+  content: "";
+  position: absolute;
+  inset: -28px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 211, 255, 0.22), transparent 68%);
+  pointer-events: none;
+}
+
+.body-1 {
+  width: 34px;
+  height: 34px;
+  background: radial-gradient(circle at 32% 28%, #ffffff, #dcecff 28%, #4f83cc 54%, #10182d 100%);
+  box-shadow:
+    0 0 24px rgba(220, 235, 255, 0.7),
+    0 0 72px rgba(139, 211, 255, 0.24);
+}
+
+.body-2 {
+  width: 26px;
+  height: 26px;
+  background: radial-gradient(circle at 32% 28%, #ffffff, #8bd3ff 32%, #275982 58%, #0b1628 100%);
+  box-shadow:
+    0 0 22px rgba(139, 211, 255, 0.66),
+    0 0 64px rgba(139, 211, 255, 0.2);
+}
+
+.body-3 {
+  width: 44px;
+  height: 44px;
+  background: radial-gradient(circle at 32% 28%, #ffffff, #b8beff 28%, #58599a 54%, #131326 100%);
+  box-shadow:
+    0 0 28px rgba(184, 190, 255, 0.7),
+    0 0 88px rgba(184, 190, 255, 0.2);
+}
+
+@keyframes orbit-one {
+  from {
+    transform: translate(-50%, -50%) rotate(-18deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(342deg);
+  }
+}
+
+@keyframes orbit-two {
+  from {
+    transform: translate(-50%, -50%) rotate(31deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(391deg);
+  }
+}
+
+@keyframes orbit-three {
+  from {
+    transform: translate(-50%, -50%) rotate(72deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(432deg);
+  }
+}
+
+@keyframes galaxy-drift {
+  from {
+    transform: translate(-50%, -50%) rotate(-18deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(342deg);
+  }
+}
+
+@keyframes galaxy-drift-reverse {
+  from {
+    transform: translate(-50%, -50%) rotate(24deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(-336deg);
+  }
+}
+
+.orbit-label {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  z-index: 5;
+  transform: translateX(-50%);
+  text-align: center;
+  padding: 0.82rem 1.15rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(15, 23, 42, 0.5);
+}
+
+.orbit-label strong {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.orbit-label small {
+  display: block;
+  color: var(--muted);
+  margin-top: 0.2rem;
 }
 
 .threebody-system {
